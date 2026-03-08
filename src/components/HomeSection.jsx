@@ -141,7 +141,7 @@ export default function HomeSection({
                 <div className="col-12 col-sm-6">
                   <a
                     href={profile.cvLink}
-                    className="btn btn-main action-btn w-100"
+                    className="btn btn-main action-btn w-100" target="_blank"
                   >
                     {text.downloadCV}
                   </a>
