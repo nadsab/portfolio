@@ -77,7 +77,7 @@ export const profile = {
     "Full Stack Web Developer graduated from OFPPT and passionate about building modern web applications. I mainly work with JavaScript, React, PHP and Laravel, with a strong focus on clean interfaces and user experience. Currently looking for an internship or a junior opportunity to grow and contribute to real-world projects.",
 
   image: "/me.jpeg",
-  cvLink: "/saber-nadah-cv.pdf",
+  cvLink: "/saber_nadah_cv.pdf",
   contactLink: "mailto:sbrnadah@gmail.com",
 };
 
