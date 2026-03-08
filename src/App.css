@@ -1,0 +1,623 @@
+.portfolio-root {
+  min-height: 100vh;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif;
+  overflow-x: hidden;
+}
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.intro-door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.98),
+    rgba(30, 41, 59, 0.98)
+  );
+  transition: transform 0.9s ease;
+}
+
+.intro-door.left {
+  left: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.intro-door.right {
+  right: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.intro-overlay.open .intro-door.left {
+  transform: translateX(-100%);
+}
+
+.intro-overlay.open .intro-door.right {
+  transform: translateX(100%);
+}
+
+.intro-center {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  padding: 1.5rem;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.intro-overlay.open .intro-center {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+.intro-title {
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.intro-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(226, 232, 240, 0.88);
+  margin-bottom: 1.25rem;
+}
+
+.scroll-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(125, 211, 252, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  color: #e0f2fe;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+
+.scroll-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #7dd3fc;
+  animation: pulseDot 1.4s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.light-theme {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.dark-theme {
+  background: #020617;
+  color: #e2e8f0;
+}
+
+.portfolio-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 3vw, 40px);
+}
+
+.glass-nav,
+.portfolio-card,
+.project-card,
+.project-modal {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.3s ease;
+}
+
+.light-theme .glass-nav {
+  position: relative;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.dark-theme .glass-nav {
+  position: relative;
+  border-radius: 1.5rem;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(100, 116, 139, 0.35);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.28);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.dark-theme .portfolio-card,
+.dark-theme .project-card,
+.dark-theme .project-modal {
+  background: rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(71, 85, 105, 0.35);
+  box-shadow: 0 10px 35px rgba(2, 6, 23, 0.35);
+}
+
+.light-theme .portfolio-card,
+.light-theme .project-card,
+.light-theme .project-modal {
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+}
+
+.portfolio-card,
+.project-card,
+.project-modal {
+  border-radius: 0.9rem;
+}
+
+.hero-badge,
+.category-badge,
+.mini-badge,
+.stack-badge,
+.skill-badge {
+  border: 1px solid rgba(14, 165, 233, 0.35);
+  color: #075985;
+  background: #e0f2fe;
+  font-weight: 600;
+}
+
+.light-theme .skill-badge {
+  background: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  color: #075985 !important;
+  font-weight: 600;
+}
+
+.light-theme .skill-badge:hover {
+  background: #bae6fd;
+  border-color: #38bdf8;
+  color: #0c4a6e !important;
+}
+
+.dark-theme .hero-badge,
+.dark-theme .category-badge,
+.dark-theme .mini-badge,
+.dark-theme .stack-badge,
+.dark-theme .skill-badge {
+  color: #7dd3fc;
+  background: rgba(8, 47, 73, 0.45);
+  border-color: rgba(125, 211, 252, 0.18);
+}
+
+.section-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(226, 232, 240, 0.8);
+  color: #334155;
+}
+
+.dark-theme .section-icon {
+  background: rgba(30, 41, 59, 0.9);
+  color: #f8fafc;
+}
+
+.hero-title,
+.section-title-text,
+.project-title,
+.profile-name,
+.modal-title {
+  color: inherit;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  line-height: 1.15;
+  max-width: 11ch;
+}
+
+.hero-text,
+.project-text,
+.modal-text,
+.feature-text,
+.stack-text {
+  color: inherit;
+  opacity: 0.88;
+}
+
+.action-btn {
+  border-radius: 1rem;
+  font-weight: 600;
+  padding: 0.68rem 1rem;
+  font-size: 0.95rem;
+}
+
+.btn-main {
+  background: #0f172a;
+  color: white;
+  border: none;
+}
+
+.btn-main:hover {
+  background: #1e293b;
+  color: white;
+}
+
+.dark-theme .btn-main {
+  background: #e2e8f0;
+  color: #020617;
+}
+
+.dark-theme .btn-main:hover {
+  background: #cbd5e1;
+  color: #020617;
+}
+
+.btn-soft {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  color: #0f172a;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.btn-soft:hover {
+  background: rgba(248, 250, 252, 1);
+  border-color: rgba(100, 116, 139, 0.55);
+  color: #0f172a;
+}
+
+.profile-shell {
+  position: relative;
+  width: clamp(170px, 20vw, 210px);
+  height: clamp(170px, 20vw, 210px);
+  margin: 0 auto 1.2rem;
+}
+
+.profile-glow {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(56, 189, 248, 0.35) 0%,
+    rgba(125, 211, 252, 0.18) 35%,
+    rgba(186, 230, 253, 0.08) 55%,
+    transparent 70%
+  );
+  filter: blur(42px);
+  opacity: 0.9;
+}
+
+.dark-theme .profile-glow {
+  background: rgba(56, 189, 248, 0.16);
+}
+
+.profile-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(125, 211, 252, 0.55);
+  animation: rotateRing 18s linear infinite;
+}
+
+.dark-theme .profile-ring {
+  border-color: rgba(14, 116, 144, 0.45);
+}
+
+@keyframes rotateRing {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dark-theme .profile-glow {
+  background: radial-gradient(
+    circle,
+    rgba(56, 189, 248, 0.22) 0%,
+    rgba(14, 165, 233, 0.12) 40%,
+    transparent 70%
+  );
+}
+
+.profile-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 18px 45px rgba(14, 165, 233, 0.14);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.profile-image-wrap:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 28px 70px rgba(14, 165, 233, 0.25);
+}
+
+.dark-theme .profile-image-wrap {
+  border-color: rgba(15, 23, 42, 0.95);
+}
+
+.profile-image-wrap img,
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.35s ease;
+}
+
+.floating-glow-top,
+.floating-glow-bottom,
+.card-glow {
+  position: absolute;
+  pointer-events: none;
+  filter: blur(38px);
+  z-index: 0;
+}
+
+.floating-glow-top {
+  top: -12px;
+  right: -8px;
+  width: 90px;
+  height: 90px;
+  border-radius: 999px;
+  background: rgba(125, 211, 252, 0.14);
+}
+
+.floating-glow-bottom {
+  left: -10px;
+  bottom: -18px;
+  width: 110px;
+  height: 110px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.12);
+}
+
+.card-glow {
+  left: 3rem;
+  right: 3rem;
+  top: 2rem;
+  height: 80px;
+  border-radius: 999px;
+  background: rgba(186, 230, 253, 0.2);
+}
+
+.project-card {
+  width: 100%;
+  cursor: pointer;
+}
+.project-card:hover .project-thumb img {
+  transform: scale(1.08);
+}
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 45px rgba(15, 23, 42, 0.1);
+}
+
+.dark-theme .project-card:hover {
+  box-shadow: 0 16px 45px rgba(2, 6, 23, 0.4);
+}
+
+.project-thumb {
+  width: 120px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+}
+
+.dark-theme .project-thumb {
+  border-color: rgba(15, 23, 42, 0.95);
+}
+
+.close-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 1rem;
+}
+
+.feature-item {
+  border-radius: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: rgba(248, 250, 252, 0.55);
+}
+
+.dark-theme .feature-item {
+  border-color: rgba(71, 85, 105, 0.35);
+  background: rgba(15, 23, 42, 0.42);
+}
+
+@media (max-width: 767.98px) {
+  .profile-shell {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    max-width: none;
+  }
+}
+/* Ça corrige le problème des éléments du nav qui deviennent trop sombres. */
+.dark-theme .btn-soft {
+  color: #cbd5e1;
+  border: 1px solid rgba(100, 116, 139, 0.35);
+}
+
+.dark-theme .btn-soft:hover {
+  background: rgba(51, 65, 85, 0.45);
+  color: #f8fafc;
+}
+/* Bouton actif du nav */
+.glass-nav .btn-main {
+  box-shadow: none;
+}
+
+.project-modal-compact {
+  max-width: 780px;
+  max-height: 85vh; /* hauteur = 80% de l'écran */
+  overflow-y: auto; /* scroll interne si contenu long */
+  padding: 1.5rem;
+}
+
+.modal-description {
+  font-size: 1.03rem;
+  line-height: 1.8;
+  max-width: 62ch;
+}
+
+.light-theme .project-modal-compact {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 18px 60px rgba(15, 23, 42, 0.14);
+}
+
+.dark-theme .project-modal-compact {
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(71, 85, 105, 0.4);
+  box-shadow: 0 18px 60px rgba(2, 6, 23, 0.5);
+}
+
+.project-modal-compact .modal-title {
+  letter-spacing: -0.02em;
+}
+
+.project-modal-compact .feature-item {
+  border-radius: 1rem;
+}
+
+.project-modal-compact .close-btn {
+  flex-shrink: 0;
+}
+
+@media (max-width: 767.98px) {
+  .project-modal-compact {
+    max-width: 92vw;
+    padding: 1rem;
+  }
+
+  .modal-description {
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+}
+/* Améliorer le scroll interne (optionnel mais très propre) */
+.project-modal-compact::-webkit-scrollbar {
+  width: 6px;
+}
+
+.project-modal-compact::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.5);
+  border-radius: 10px;
+}
+
+.dark-theme .project-modal-compact::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.6);
+}
+/*  */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+}
+.modal-links {
+  margin-top: 6px;
+}
+
+.modal-links .btn {
+  font-size: 0.85rem;
+  padding: 6px 10px;
+}
+
+.dark-theme .btn-soft {
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: inherit;
+  box-shadow: none;
+}
+
+.dark-theme .btn-soft:hover {
+  background: rgba(148, 163, 184, 0.08);
+  color: inherit;
+}
+
+.light-theme .project-modal .btn-soft,
+.light-theme .project-modal-compact .btn-soft {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  color: #0f172a;
+}
+
+.light-theme .project-modal .btn-soft:hover,
+.light-theme .project-modal-compact .btn-soft:hover {
+  background: #ffffff;
+  border-color: rgba(100, 116, 139, 0.55);
+  color: #0f172a;
+}
+
+/* boutons plus visibles en mode clair */
+.light-theme .btn-main {
+  background: #0f172a;
+  color: white;
+  border: none;
+}
+
+.light-theme .btn-main:hover {
+  background: #1e293b;
+  color: white;
+}
+
+.light-theme .btn-soft {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+}
+
+.light-theme .btn-soft:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  color: #020617;
+}
